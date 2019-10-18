@@ -1,12 +1,61 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useEffect } from "react";
+import NavBar from "./component/navbar";
 import "./App.css";
-import Form from "./component";
-const App: React.FC = () => {
+import Login, { UserProps, State } from "./component/login";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  RouteProps
+} from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { AppActions, SET_SESSION } from "./types/action";
+
+import Home from "./component/home";
+import StoreState, { User } from "./types/user";
+import Protected from "./component/protected";
+
+function App() {
+  console.log(sessionStorage.getItem("token"));
+  const dispatch = useDispatch();
+
+  dispatch({
+    type: SET_SESSION,
+    payload: sessionStorage.getItem("token") ? true : false
+  });
+
   return (
-    <div className="App">
-      <Form name="" />
+    /* <Form name="" /> */
+    <div>
+      <Router>
+        <NavBar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <AuthRoute exact path="/login" component={Login} />
+          <Route exact path="/protected" component={Protected} />
+        </Switch>
+      </Router>
     </div>
+  );
+}
+
+const AuthRoute = ({ component: Component, ...rest }: RouteProps) => {
+  if (!Component) {
+    throw Error("component is undefined");
+  }
+  const authenticated = useSelector(
+    (state: StoreState) => state.user.authenticated
+  );
+
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        authenticated === true ? <Redirect to="/" /> : <Component {...props} />
+      }
+    />
   );
 };
 

@@ -3,17 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.5.0",
+    "@types/axios": "^0.14.0",
     "@types/dotenv": "^6.1.1",
     "@types/dotenv-webpack": "^1.7.0",
     "@types/jest": "24.0.18",
     "@types/node": "12.7.7",
     "@types/react": "16.9.3",
     "@types/react-dom": "16.9.1",
+    "@types/react-redux": "^7.1.4",
+    "@types/react-router-dom": "^5.1.0",
+    "@types/redux": "^3.6.0",
+    "@types/redux-thunk": "^2.1.0",
+    "axios": "^0.19.0",
     "dotenv": "^8.1.0",
     "dotenv-webpack": "^1.7.0",
+    "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.2",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
     "typescript": "3.6.3"
   },
   "scripts": {
@@ -36,5 +49,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "proxy": "http://localhost:3000",
+  "devDependencies": {
+    "@types/prop-types": "^15.7.3"
   }
 }
